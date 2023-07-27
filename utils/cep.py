@@ -24,12 +24,12 @@ def cadastro_endereco():
         endereco['complemento'] = input("Complemento: ")
         print(endereco['logradouro'])
         retorna_menu_endereco = input("O endereço acima está correto? Digite (s)im ou (n)ão ").lower()
-        if retorna_menu_endereco == "sim" or retorna_menu_endereco == "s":
+        if retorna_menu_endereco in ["sim", "s"]:
             return endereco
-        elif retorna_menu_endereco == "nao" or retorna_menu_endereco == "n":
-            print("Tente novamente. ")
+        elif retorna_menu_endereco in ["nao", "n"]:
+            print("Tente novamente.")
         else:
-            print("Opção inválida, tente novamente. Digite 'sim' ou 'não'.")
+            print("Opção inválida, tente novamente. Digite '(s)im' ou '(n)ão'.")
 
 
 if __name__ == "__main__":

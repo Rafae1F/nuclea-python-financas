@@ -3,7 +3,7 @@ def retornar_menu_principal():
         retornar_menu_principal = input("Deseja retornar ao menu principal? ((s)im ou (n)ão): ").lower()
         if retornar_menu_principal in ["sim", "s"]:
             retorna_menu = True
-        elif retornar_menu_principal in ["não", "nao", "n"]:
+        elif retornar_menu_principal in ["nao", "n"]:
             retorna_menu = False
         else:
             print("Opção inválida, tente novamente. Digite 'sim' ou 'não'.")

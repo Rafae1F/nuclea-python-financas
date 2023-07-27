@@ -59,6 +59,8 @@ while (validador):
     elif opcao == 4:
         imprime_relatorio()
     elif opcao == 5:
-        sair()
+        print("5 - Sair")
+        print("Obrigado por utilizar o sistema de gerenciamento de carteira de ações da Nuclea. Até a próxima!")
+        validador = False
     else:
         print("Opção inválida, tente novamente. Escolha uma opção entre 1 e 5.")

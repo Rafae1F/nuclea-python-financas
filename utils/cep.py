@@ -6,6 +6,7 @@ from utils.funcoes_auxiliares import retornar_menu
 def valida_cep():
     while True:
         cep = input("Digite seu cep para buscar o endereço: ")
+        cep.replace("/[^0-9]/", "")
         url = f"https://viacep.com.br/ws/{cep}/json/"
         response = requests.get(url)
         if response.status_code == 200:

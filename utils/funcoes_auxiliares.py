@@ -13,7 +13,10 @@ def retornar_menu_principal():
 def retornar_menu(item_cadastro, campo_cadastro):
     while True:
         for item in item_cadastro:
-            print("{0:20} {1:20}".format(str(item), str(item_cadastro[item])))
+            if isinstance(item_cadastro[item], dict):
+                pass
+            else:
+                print("{0:20} {1:20}".format(item, (item_cadastro[item])))
 
         retornar_menu = input(f"Os dados acima estão corretos? Digite (s)im ou (n)ão ").lower()
         if retornar_menu in ["sim", "s"]:

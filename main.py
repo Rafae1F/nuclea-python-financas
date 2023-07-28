@@ -16,11 +16,10 @@ def cadastro_cliente():
         "data_nascimento": valida_data_nascimento(),
         "endereco": cadastro_endereco(),
     }
-
+    retornar_menu(cliente, cadastro_cliente)
     clientes.append(cliente)
+    print("Cliente cadastrado com sucesso!")
 
-    print("Informações do cliente cadastrado:")
-    print(cliente)
     global validador
     validador = retornar_menu_principal()
 

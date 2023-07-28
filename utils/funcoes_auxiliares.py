@@ -9,6 +9,24 @@ def retornar_menu_principal():
             print("Opção inválida, tente novamente. Digite 'sim' ou 'não'.")
         return retorna_menu
 
+def retornar_menu(item_cadastro, campo_cadastro):
+    while True:
+        if 'cep' in item_cadastro:
+            for item in item_cadastro:
+                print("{0:20} {1:20}".format(item, item_cadastro[item]))
+        elif 'nome' in item_cadastro:
+            for item in item_cadastro:
+                print("{0:20} {1:20}".format(str(item), str(item_cadastro[item])))
+
+        retornar_menu = input(f"Os dados acima estão corretos? Digite (s)im ou (n)ão ").lower()
+        if retornar_menu in ["sim", "s"]:
+            return item_cadastro
+        elif retornar_menu in ["nao", "n"]:
+            print("Refazer cadastro")
+            campo_cadastro()
+        else:
+            print("Opção inválida, tente novamente.")
+
 
 def sair():
     print("5 - Sair")

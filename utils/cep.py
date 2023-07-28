@@ -1,5 +1,6 @@
 import requests
 import json
+from utils.funcoes_auxiliares import retornar_menu
 
 
 def valida_cep():
@@ -22,18 +23,9 @@ def cadastro_endereco():
         endereco = valida_cep()
         endereco['numero'] = input("Digite o numero de sua residência: ")
         endereco['complemento'] = input("Complemento: ")
-
-        while True:
-            print(endereco['logradouro'])
-            retorna_menu_endereco = input("O endereço acima está correto? Digite (s)im ou (n)ão ").lower()
-            if retorna_menu_endereco in ["sim", "s"]:
-                return endereco
-            elif retorna_menu_endereco in ["nao", "n"]:
-                print("Refazer cadastro de endereço")
-                cadastro_endereco()
-            else:
-                print("Opção inválida, tente novamente.")
-
+        retornar_menu(endereco, cadastro_endereco)
+        print("Endereço cadastrado com sucesso!")
+        return endereco
 
 if __name__ == "__main__":
     cadastro_endereco()

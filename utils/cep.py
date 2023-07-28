@@ -1,5 +1,4 @@
 import requests
-import json
 from utils.funcoes_auxiliares import retornar_menu
 
 
@@ -10,7 +9,7 @@ def valida_cep():
         url = f"https://viacep.com.br/ws/{cep}/json/"
         response = requests.get(url)
         if response.status_code == 200:
-            endereco = json.loads(response.text)
+            endereco = response.json()
             if 'erro' in endereco:
                 print("CEP inválido. Tente novamente.")
             else:

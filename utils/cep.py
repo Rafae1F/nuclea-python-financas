@@ -31,7 +31,7 @@ def valida_cep():
 def cadastro_endereco():
     while True:
         endereco = valida_cep()
-        endereco['Numero'] = input("Digite o numero de sua residência: ")
+        endereco['Numero'] = input("Número da residência: ")
         endereco['Complemento'] = input("Complemento: ")
         return retornar_menu(endereco, cadastro_endereco)
 

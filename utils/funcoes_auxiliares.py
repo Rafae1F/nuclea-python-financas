@@ -9,6 +9,7 @@ def retornar_menu_principal():
             print("Opção inválida, tente novamente. Digite 'sim' ou 'não'.")
         return retorna_menu
 
+
 def retornar_menu(item_cadastro, campo_cadastro):
     while True:
         if 'cep' in item_cadastro:

@@ -25,5 +25,6 @@ def cadastro_endereco():
         endereco['complemento'] = input("Complemento: ")
         return retornar_menu(endereco, cadastro_endereco)
 
+
 if __name__ == "__main__":
     cadastro_endereco()

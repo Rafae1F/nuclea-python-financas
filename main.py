@@ -38,7 +38,7 @@ def imprime_relatorio():
 validador = True
 clientes = []
 
-while (validador):
+while validador:
     print("=== MENU ===")
     print("1 - Cadastrar cliente")
     print("2 - Cadastrar ação")

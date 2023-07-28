@@ -9,7 +9,7 @@ def valida_cpf():
         cpf = input("CPF: ")
         resultado_validacao = cpf_validador.validate(cpf)
 
-        if (resultado_validacao):
+        if resultado_validacao:
             if re.match(r'\d{3}\.\d{3}\.\d{3}-\d{2}', cpf):
                 return cpf
             else:

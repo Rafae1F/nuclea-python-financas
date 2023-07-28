@@ -9,10 +9,20 @@ def valida_cep():
         url = f"https://viacep.com.br/ws/{cep}/json/"
         response = requests.get(url)
         if response.status_code == 200:
-            endereco = response.json()
-            if 'erro' in endereco:
+            data = response.json()
+            if 'erro' in data:
                 print("CEP inválido. Tente novamente.")
             else:
+                endereco = {
+                    "CEP": data['cep'],
+                    "Logradouro": data['logradouro'],
+                    "Numero": ['numero'],
+                    'Complemento': data['complemento'],
+                    "Bairro": data['bairro'],
+                    "Cidade": data['localidade'],
+                    "Estado": data['uf'],
+                    'DDD': data['ddd']
+                }
                 return endereco
         else:
             print("CEP inválido. Tente novamente.")
@@ -21,8 +31,8 @@ def valida_cep():
 def cadastro_endereco():
     while True:
         endereco = valida_cep()
-        endereco['numero'] = input("Digite o numero de sua residência: ")
-        endereco['complemento'] = input("Complemento: ")
+        endereco['Numero'] = input("Digite o numero de sua residência: ")
+        endereco['Complemento'] = input("Complemento: ")
         return retornar_menu(endereco, cadastro_endereco)
 
 

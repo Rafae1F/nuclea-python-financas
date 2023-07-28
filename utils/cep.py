@@ -23,9 +23,7 @@ def cadastro_endereco():
         endereco = valida_cep()
         endereco['numero'] = input("Digite o numero de sua residência: ")
         endereco['complemento'] = input("Complemento: ")
-        retornar_menu(endereco, cadastro_endereco)
-        print("Endereço cadastrado com sucesso!")
-        return endereco
+        return retornar_menu(endereco, cadastro_endereco)
 
 if __name__ == "__main__":
     cadastro_endereco()

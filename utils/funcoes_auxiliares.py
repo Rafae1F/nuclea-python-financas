@@ -20,10 +20,11 @@ def retornar_menu(item_cadastro, campo_cadastro):
 
         retornar_menu = input(f"Os dados acima estão corretos? Digite (s)im ou (n)ão ").lower()
         if retornar_menu in ["sim", "s"]:
+            print("Cadastrado efetuado com sucesso!")
             return item_cadastro
         elif retornar_menu in ["nao", "n"]:
             print("Refazer cadastro")
-            campo_cadastro()
+            return campo_cadastro()
         else:
             print("Opção inválida, tente novamente.")
 

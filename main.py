@@ -18,7 +18,6 @@ def cadastro_cliente():
     }
     retornar_menu(cliente, cadastro_cliente)
     clientes.append(cliente)
-    print("Cliente cadastrado com sucesso!")
 
     global validador
     validador = retornar_menu_principal()

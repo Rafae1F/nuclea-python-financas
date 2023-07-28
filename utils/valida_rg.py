@@ -16,9 +16,3 @@ def valida_rg():
 
 if __name__ == "__main__":
     valida_rg()
-
-# 0.000.000
-
-# Módulos: Arquivo Python
-# Pacotes: Conjunto de módulos
-# Bibliotecas: Conjunto de pacotes e módulos. Exemplo: Math

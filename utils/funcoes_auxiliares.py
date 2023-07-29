@@ -29,12 +29,6 @@ def retornar_menu(item_cadastro, campo_cadastro):
             print("Opção inválida, tente novamente.")
 
 
-def sair():
-    print("Sair")
-    print("Obrigado por utilizar o sistema de gerenciamento de carteira de ações da Nuclea. Até a próxima!")
-    exit()
-
-
 def formata_texto(texto):
     nome_formatado = texto.title()
     return nome_formatado

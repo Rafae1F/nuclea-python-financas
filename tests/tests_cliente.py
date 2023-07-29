@@ -1,5 +1,4 @@
 import unittest
-from faker import Faker
 from faker import Factory
 from unittest.mock import patch
 from main import main, clientes
@@ -46,4 +45,4 @@ class TestStringMethods(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    gerar_nome_fake()
+    main()

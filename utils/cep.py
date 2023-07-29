@@ -10,9 +10,7 @@ def valida_cep():
         response = requests.get(url)
         if response.status_code == 200:
             data = response.json()
-            if 'erro' in data:
-                print("CEP inválido. Tente novamente.")
-            else:
+            if 'erro' not in data:
                 endereco = {
                     "CEP": data['cep'],
                     "Logradouro": data['logradouro'],
@@ -24,6 +22,8 @@ def valida_cep():
                     'DDD': data['ddd']
                 }
                 return endereco
+            else:
+                print("CEP inválido. Tente novamente.")
         else:
             print("CEP inválido. Tente novamente.")
 

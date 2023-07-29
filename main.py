@@ -35,30 +35,31 @@ def imprime_relatorio():
     print("4 - Imprimir relatório da carteira")
 
 
-validador = True
 clientes = []
 
-while validador:
-    print("=== MENU ===")
-    print("1 - Cadastrar cliente")
-    print("2 - Cadastrar ação")
-    print("3 - Realizar análise da carteira")
-    print("4 - Imprimir relatório da carteira")
-    print("5 - Sair")
-
-    opcao = int(input("Escolha uma opção de 1 a 5: "))
-
-    if opcao == 1:
-        cadastro_cliente()
-    elif opcao == 2:
-        cadastro_acao()
-    elif opcao == 3:
-        analise()
-    elif opcao == 4:
-        imprime_relatorio()
-    elif opcao == 5:
+def main():
+    validador = True
+    while validador:
+        print("=== MENU ===")
+        print("1 - Cadastrar cliente")
+        print("2 - Cadastrar ação")
+        print("3 - Realizar análise da carteira")
+        print("4 - Imprimir relatório da carteira")
         print("5 - Sair")
-        print("Obrigado por utilizar o sistema de gerenciamento de carteira de ações da Nuclea. Até a próxima!")
-        validador = False
-    else:
-        print("Opção inválida, tente novamente. Escolha uma opção entre 1 e 5.")
+
+        opcao = int(input("Escolha uma opção de 1 a 5: "))
+
+        if opcao == 1:
+            cadastro_cliente()
+        elif opcao == 2:
+            cadastro_acao()
+        elif opcao == 3:
+            analise()
+        elif opcao == 4:
+            imprime_relatorio()
+        elif opcao == 5:
+            print("5 - Sair")
+            print("Obrigado por utilizar o sistema de gerenciamento de carteira de ações da Nuclea. Até a próxima!")
+            validador = False
+        else:
+            print("Opção inválida, tente novamente. Escolha uma opção entre 1 e 5.")

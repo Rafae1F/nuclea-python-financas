@@ -11,8 +11,8 @@ def valida_cep(cep):
             endereco = {
                 "CEP": data['cep'],
                 "Logradouro": data['logradouro'],
-                "Numero": [''],
-                'Complemento': data['complemento'],
+                "Numero": input("Numero da residência: "),
+                'Complemento': input("Complemento: "),
                 "Bairro": data['bairro'],
                 "Cidade": data['localidade'],
                 "Estado": data['uf'],
@@ -31,8 +31,6 @@ def cadastro_endereco():
         if cep.isdigit() and len(cep) == 8:
             endereco = valida_cep(cep)
             if endereco:
-                endereco['Numero'] = input("Número da residência: ")
-                endereco['Complemento'] = input("Complemento: ")
                 return retornar_menu(endereco, cadastro_endereco)
             else:
                 print("CEP não encontrado ou inválido")

@@ -14,7 +14,7 @@ def valida_cep():
                 endereco = {
                     "CEP": data['cep'],
                     "Logradouro": data['logradouro'],
-                    "Numero": ['numero'],
+                    "Numero": [''],
                     'Complemento': data['complemento'],
                     "Bairro": data['bairro'],
                     "Cidade": data['localidade'],

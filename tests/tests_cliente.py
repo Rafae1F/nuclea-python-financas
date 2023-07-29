@@ -19,7 +19,7 @@ class TestStringMethods(unittest.TestCase):
     def test_cliente(self):
         nome = self.gerar_nome_fake()
         cpf = self.gera_cpf()
-        inputs = ["1", nome, cpf, "12.345.678-x", "12/02/2001", "05003-060", "42", "apto 100", "sim", "sim", "sim", "5"]
+        inputs = ["1", nome, cpf, "12.345.678-x", "12/02/2001", "05003-060", "42", "apto 100", "sim", "sim", "nao"]
 
         with patch("builtins.input", side_effect=inputs):
             main()

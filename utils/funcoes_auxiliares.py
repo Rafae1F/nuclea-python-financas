@@ -1,11 +1,10 @@
 def retornar_menu_principal():
-    global retorna_menu
     while True:
         retornar_menu_principal = input("Deseja retornar ao menu principal? ((s)im ou (n)ão): ").lower()
         if retornar_menu_principal in ["sim", "s"]:
             retorna_menu = True
         elif retornar_menu_principal in ["nao", "n"]:
-            return sair()
+            retorna_menu = False
         else:
             print("Opção inválida, tente novamente. Digite 'sim' ou 'não'.")
         return retorna_menu

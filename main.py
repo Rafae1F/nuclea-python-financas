@@ -18,7 +18,8 @@ def cadastro_cliente():
     }
     retornar_menu(cliente, cadastro_cliente)
     clientes.append(cliente)
-    retornar_menu_principal()
+    global validador
+    validador = retornar_menu_principal()
 
 
 def cadastro_acao():
@@ -37,8 +38,10 @@ clientes = []
 
 
 def main():
-    while True:
-        print("=== MENU ===")
+    global validador
+    validador = True
+    while validador:
+        print("=============== MENU ===============")
         print("1 - Cadastrar cliente")
         print("2 - Cadastrar ação")
         print("3 - Realizar análise da carteira")
@@ -56,7 +59,9 @@ def main():
         elif opcao == 4:
             imprime_relatorio()
         elif opcao == 5:
-            sair()
+            print("Sair")
+            print("Obrigado por utilizar o sistema de gerenciamento de carteira de ações da Nuclea. Até a próxima!")
+            validador = False
         else:
             print("Opção inválida, tente novamente. Escolha uma opção entre 1 e 5.")
 

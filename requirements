@@ -1,3 +1,4 @@
 validate-docbr==1.10.0
 requests==2.31.0
 faker==0.7.4
+psycopg2==2.9.6

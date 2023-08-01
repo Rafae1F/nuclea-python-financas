@@ -4,26 +4,39 @@ from datetime import datetime
 
 def valida_data_nascimento():
     while True:
-
         data_nascimento = input("Data Nascimento: ")
+        data_nascimento_mascarada = mascara_data(data_nascimento)
+        if valida_data(data_nascimento_mascarada):
+            return data_nascimento_mascarada
 
-        try:
 
-            if re.match(r'(\d{2})/(\d{2})/(\d{2,4})', data_nascimento):
-                pass
-            else:
-                data_nascimento = f"{data_nascimento[:2]}/{data_nascimento[2:4]}/{data_nascimento[4:]}"
+def valida_data_compra():
+    while True:
+        data_compra = input("Data da compra: ")
+        data_compra_mascarada = mascara_data(data_compra)
+        if valida_data(data_compra_mascarada):
+            return data_compra_mascarada
 
-            data_convertida = datetime.strptime(data_nascimento, "%d/%m/%Y").date()
-            data_atual = datetime.now().date()
 
-            if data_convertida < data_atual:
-                return data_convertida.strftime("%d/%m/%Y")
-            else:
-                print("A data de nascimento não pode ser maior que a data atual.")
-        except ValueError as e:
-            print(f"Erro: {e}.")
-            print("Data inválida, tente novamente.")
+def mascara_data(data_informada):
+    if re.match(r'(\d{2})/(\d{2})/(\d{2,4})', data_informada):
+        return data_informada
+    else:
+        return f"{data_informada[:2]}/{data_informada[2:4]}/{data_informada[4:]}"
+
+
+def valida_data(data_informada):
+    try:
+        data_convertida = datetime.strptime(data_informada, "%d/%m/%Y").date()
+        data_atual = datetime.now().date()
+        if data_convertida <= data_atual:
+            return data_convertida.strftime("%d/%m/%Y")
+        else:
+            print("A data informada não pode ser maior que a data atual.")
+            return False
+    except ValueError:
+        print("Data inválida. Certifique-se de informar a data no formato dd/mm/aaaa.")
+        return False
 
 
 if __name__ == "__main__":

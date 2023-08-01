@@ -1,13 +1,13 @@
+
 def retornar_menu_principal():
     while True:
-        retornar_menu_principal = input("Deseja retornar ao menu principal? ((s)im ou (n)ão): ").lower()
-        if retornar_menu_principal in ["sim", "s"]:
-            retorna_menu = True
-        elif retornar_menu_principal in ["nao", "n"]:
-            retorna_menu = False
+        opcao = input("Deseja retornar ao menu principal? ((s)im ou (n)ão): ").lower()
+        if opcao in ["sim", "s"]:
+            return True
+        elif opcao in ["nao", "n"]:
+            return False
         else:
             print("Opção inválida, tente novamente. Digite 'sim' ou 'não'.")
-        return retorna_menu
 
 
 def retornar_menu(item_cadastro, campo_cadastro):
@@ -27,6 +27,15 @@ def retornar_menu(item_cadastro, campo_cadastro):
             return campo_cadastro()
         else:
             print("Opção inválida, tente novamente.")
+
+
+class Cliente:
+    def __init__(self, nome, cpf, rg, data_nascimento, endereco):
+            self.nome = nome
+            self.cpf = cpf
+            self.rg = rg
+            self.data_nascimento = data_nascimento
+            self. endereco = endereco
 
 
 def formata_texto(texto):

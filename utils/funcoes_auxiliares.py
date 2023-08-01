@@ -29,15 +29,6 @@ def retornar_menu(item_cadastro, campo_cadastro):
             print("Opção inválida, tente novamente.")
 
 
-class Cliente:
-    def __init__(self, nome, cpf, rg, data_nascimento, endereco):
-            self.nome = nome
-            self.cpf = cpf
-            self.rg = rg
-            self.data_nascimento = data_nascimento
-            self. endereco = endereco
-
-
 def formata_texto(texto):
     nome_formatado = texto.title()
     return nome_formatado

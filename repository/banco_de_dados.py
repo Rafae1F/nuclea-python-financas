@@ -106,5 +106,3 @@ class BancoDeDados:
 
 
 conexao = BancoDeDados()
-cliente = {"cpf": "914.566.460-95"}
-conexao.select_cliente_banco_de_dados(cliente)

@@ -1,5 +1,7 @@
+from analise_carteira import analise_carteira
 from models import ordem
 from models.cliente import Cliente
+from relatorio import obter_dados_acao
 from repository.banco_de_dados import conexao
 from utils.cep import cadastro_endereco
 from utils.data import valida_data_nascimento
@@ -39,7 +41,7 @@ def menu_cliente():
         elif opcao == 4:
             cpf_delecao = input("Digite o CPF do cliente a ser deletado: ")
             consulta_cliente.consultar_cliente(cpf_delecao)
-            if clientes is not None:
+            if clientes in cpf_delecao:
                 confirmacao = input("Tem certeza que deseja remover esse cliente? (sim/nao)")
                 if confirmacao in ["sim", "s"]:
                     consulta_cliente.delete_cliente(cpf_delecao)
@@ -115,9 +117,11 @@ def main():
         elif opcao == 2:
             menu_ordem()
         elif opcao == 3:
-            analise()
+            analise_carteira()
         elif opcao == 4:
-            imprime_relatorio()
+            ticket = input("Digite o código da ação na B3 (ex: PETR4): ").strip().upper()
+            nome_arquivo = input("Digite o nome do arquivo de saída (ex: relatorio_acao.txt): ").strip()
+            obter_dados_acao(ticket, nome_arquivo)
         elif opcao == 5:
             print("Sair")
             print("Obrigado por utilizar o sistema de gerenciamento de carteira de ações da Nuclea. Até a próxima!")

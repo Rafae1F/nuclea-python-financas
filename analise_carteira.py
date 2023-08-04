@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
-def main():
+def analise_carteira():
     # Definir o período de data desejado
     start_date = "2020-01-01"
     end_date = "2023-01-01"
@@ -30,4 +30,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    analise_carteira()

@@ -1,4 +1,5 @@
 from models import ordem
+from models.cliente import Cliente
 from repository.banco_de_dados import conexao
 from utils.cep import cadastro_endereco
 from utils.data import valida_data_nascimento
@@ -20,8 +21,8 @@ def menu_cliente():
             cadastro_cliente()
         elif opcao == 2:
             cpf_consulta = input("Digite o CPF do cliente a ser consultado: ")
-            conditions = {'cpf': cpf_consulta}
-            conexao.select_cliente_banco_de_dados(conditions)
+            consulta_cliente = Cliente()
+            consulta_cliente.consultar_cliente(cpf_consulta)
         elif opcao == 3:
             cpf_atualizacao = input("Digite o CPF do cliente a ser atualizado: ")
             conditions = {'cpf': cpf_atualizacao}
@@ -60,7 +61,8 @@ def cadastro_cliente():
         "endereco": cadastro_endereco()
     }
     retornar_menu(cliente, cadastro_cliente)
-    conexao.insert_cliente_banco_de_dados(cliente)
+    novo_cliente = Cliente()
+    novo_cliente.cadastrar_cliente(cliente)
     clientes.append(cliente)
     print("Cadastro finalizado com sucesso!")
 

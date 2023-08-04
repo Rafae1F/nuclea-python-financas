@@ -19,7 +19,7 @@ class Cliente:
         self.ddd = None
         self.banco_de_dados = BancoDeDados()
 
-    def cadastrar_cliente(self):
+    def cadastrar_cliente(self, cliente):
         self.nome = "nome"
         self.cpf = "cpf"
         self.rg = "rg"
@@ -32,11 +32,15 @@ class Cliente:
         self.cidade = "cidade"
         self.estado = "estado"
         self.ddd = "ddd"
-        self.banco_de_dados.insert_cliente_banco_de_dados(self)
+        self.banco_de_dados.insert_cliente_banco_de_dados(cliente)
 
-    def consultar_cliente(self):
-        condicao = {'cpf': self}
-        self.banco_de_dados.select_cliente_banco_de_dados(condicao)
+    def consultar_cliente(self, consulta):
+        condicao = {'cpf': consulta}
+        resultado = self.banco_de_dados.select_cliente_banco_de_dados(condicao)
+        if resultado is not None:
+            pass
+        else:
+            print("Documento não encontrado.")
 
     def alterar_cliente(self):
         condicao = {'cpf': self}

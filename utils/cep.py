@@ -18,7 +18,6 @@ def valida_cep(cep):
                 "Estado": data['uf'],
                 'DDD': data['ddd']
             }
-
             return endereco
 
 

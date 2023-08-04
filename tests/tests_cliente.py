@@ -5,7 +5,7 @@ from main import main, clientes
 from validate_docbr import CPF
 
 
-class TestStringMethods(unittest.TestCase):
+class TestCliente(unittest.TestCase):
 
     def gerar_nome_fake(self):
         fake = Factory.create('pt_BR')

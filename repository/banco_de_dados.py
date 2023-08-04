@@ -18,7 +18,7 @@ class BancoDeDados:
         self.insert('ordem', ordem_data)
 
     def insert_cliente_banco_de_dados(self, cliente):
-        print("Inserindo cliente no banco de dados: ")
+        print("Inserindo cliente no banco de dados... ")
         insert_query = """
                         INSERT INTO cliente (nome, cpf, rg, data_nascimento, cep, logradouro, numero, complemento,
         	            bairro, cidade, estado, ddd)

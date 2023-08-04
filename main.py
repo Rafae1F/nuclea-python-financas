@@ -25,15 +25,15 @@ def menu_cliente():
             consulta_cliente.consultar_cliente(cpf_consulta)
         elif opcao == 3:
             cpf_atualizacao = input("Digite o CPF do cliente a ser atualizado: ")
-            conditions = {'cpf': cpf_atualizacao}
-            cliente = conexao.select_cliente_banco_de_dados(conditions)
+            consulta_cliente = Cliente()
+            cliente = consulta_cliente.consultar_cliente(cpf_atualizacao)
             if cliente:
                 cliente.nome = input("Digite o novo nome do cliente: ")
                 cliente.cpf = valida_cpf()
                 cliente.rg = valida_rg()
                 cliente.data_nascimento = valida_data_nascimento()
-                cliente.cep = cadastro_endereco()
-                conexao.update_cliente_banco_de_dados(cliente)
+                cliente.endereco = cadastro_endereco()
+                consulta_cliente.alterar_cliente()
                 print("Cliente atualizado com sucesso!")
             else:
                 print("Cliente não encontrado.")
@@ -57,10 +57,11 @@ def cadastro_cliente():
         "nome": formata_texto(input("Nome: ")),
         "cpf": valida_cpf(),
         "rg": valida_rg(),
-        "data_nascimento": valida_data_nascimento(),
-        "endereco": cadastro_endereco()
+        "data_nascimento": valida_data_nascimento()
     }
     retornar_menu(cliente, cadastro_cliente)
+    cliente['endereco'] = cadastro_endereco()
+    print(cliente)
     novo_cliente = Cliente()
     novo_cliente.cadastrar_cliente(cliente)
     clientes.append(cliente)

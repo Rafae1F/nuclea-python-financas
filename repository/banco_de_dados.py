@@ -47,9 +47,13 @@ class BancoDeDados:
         select_query = f"SELECT * FROM cliente where {condition}"
         self.cursor.execute(select_query, list(conditions.values()))
         clientes = self.cursor.fetchall()
-        for cliente in clientes:
-            print(cliente)
-        return clientes
+        if clientes:
+            for cliente in clientes:
+                print(cliente)
+                print("Cliente encontrado!")
+            return clientes
+        else:
+            return None
 
     def update_cliente_banco_de_dados(self, cliente):
         if not cliente.cpf:

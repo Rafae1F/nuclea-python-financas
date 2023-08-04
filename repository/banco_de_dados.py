@@ -53,7 +53,7 @@ class BancoDeDados:
                 print("Cliente encontrado!")
             return clientes
         else:
-            return None
+            print("Documento não encontrado na base de dados.")
 
     def update_cliente_banco_de_dados(self, cliente):
         if not cliente.cpf:

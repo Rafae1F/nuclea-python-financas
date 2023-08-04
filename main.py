@@ -17,15 +17,14 @@ def menu_cliente():
         print("4 - Deletar cliente")
         print("5 - Retornar ao menu principal")
         opcao = int(input("Escolha uma opção de 1 a 5: "))
+        consulta_cliente = Cliente()
         if opcao == 1:
             cadastro_cliente()
         elif opcao == 2:
             cpf_consulta = input("Digite o CPF do cliente a ser consultado: ")
-            consulta_cliente = Cliente()
             consulta_cliente.consultar_cliente(cpf_consulta)
         elif opcao == 3:
             cpf_atualizacao = input("Digite o CPF do cliente a ser atualizado: ")
-            consulta_cliente = Cliente()
             cliente = consulta_cliente.consultar_cliente(cpf_atualizacao)
             if cliente:
                 cliente.nome = input("Digite o novo nome do cliente: ")
@@ -39,12 +38,16 @@ def menu_cliente():
                 print("Cliente não encontrado.")
         elif opcao == 4:
             cpf_delecao = input("Digite o CPF do cliente a ser deletado: ")
-            conditions = {'cpf': cpf_delecao}
-            if conexao.select_cliente_banco_de_dados(conditions):
-                conexao.delete_cliente_banco_de_dados(cpf_delecao)
-                print("Cliente deletado com sucesso!")
-            else:
-                print("Cliente não encontrado.")
+            consulta_cliente.consultar_cliente(cpf_delecao)
+            if clientes is not None:
+                confirmacao = input("Tem certeza que deseja remover esse cliente? (sim/nao)")
+                if confirmacao in ["sim", "s"]:
+                    consulta_cliente.delete_cliente(cpf_delecao)
+                    print("Cliente deletado com sucesso!")
+                elif confirmacao in ["nao", "n"]:
+                    menu_cliente()
+                else:
+                    print("Opção inválida!")
         elif opcao == 5:
             return True
         else:

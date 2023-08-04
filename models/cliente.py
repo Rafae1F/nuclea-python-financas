@@ -36,16 +36,11 @@ class Cliente:
 
     def consultar_cliente(self, consulta):
         condicao = {'cpf': consulta}
-        resultado = self.banco_de_dados.select_cliente_banco_de_dados(condicao)
-        if resultado is not None:
-            pass
-        else:
-            print("Documento não encontrado.")
+        self.banco_de_dados.select_cliente_banco_de_dados(condicao)
 
     def alterar_cliente(self):
         condicao = {'cpf': self}
         self.banco_de_dados.update_cliente_banco_de_dados(condicao)
 
-    def delete_cliente(self):
-        condicao = {'cpf': self}
-        self.banco_de_dados.delete_cliente_banco_de_dados(condicao)
+    def delete_cliente(self, cpf_delecao):
+        self.banco_de_dados.delete_cliente_banco_de_dados(cpf_delecao)

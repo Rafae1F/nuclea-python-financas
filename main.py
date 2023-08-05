@@ -109,7 +109,7 @@ def cadastro_ordem():
             'valor_compra': float(input("Digite o valor de compra: ")),
             'quantidade_compra': int(input("Digite a quantidade: ")),
             'data_compra': input("Digite a data de compra: "),
-            'cliente_id': cpf
+            'cliente_id': cliente_encontrado['id']
         }
         retornar_menu(ordem, cadastro_ordem)
         nova_ordem.cadastrar_ordem(ordem)

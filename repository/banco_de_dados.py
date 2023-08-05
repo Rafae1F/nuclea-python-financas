@@ -15,6 +15,7 @@ class BancoDeDados:
     def insert_ordem_banco_de_dados(self, ordem):
         print("Inserindo ordem no banco de dados...")
         self.insert('ordem', ordem)
+        print(ordem)
 
     def insert_cliente_banco_de_dados(self, cliente):
         print("Inserindo cliente no banco de dados... ")

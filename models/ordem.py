@@ -19,7 +19,5 @@ class Ordem:
         self.valor_compra = "valor_compra"
         self.quantidade_compra = "quantidade_compra"
         self.data_compra = "data_compra"
-        self.cliente_id = "cpf"
+        self.cliente_id = "id"
         self.banco_de_dados.insert_ordem_banco_de_dados(ordem)
-        print(f"Nome: {self.nome} Ticket: {self.ticket} Valor de compra: {self.valor_compra} "
-              f"Quantidade: {self.quantidade_compra} Data da compra: {self.data_compra}")

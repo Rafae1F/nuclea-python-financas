@@ -21,3 +21,7 @@ class Ordem:
         self.data_compra = "data_compra"
         self.cliente_id = "id"
         self.banco_de_dados.insert_ordem_banco_de_dados(ordem)
+
+    def consultar_ordem(self, cpf):
+        carteira_selecionada = self.banco_de_dados.select_ordem_banco_de_dados(cpf)
+        return carteira_selecionada

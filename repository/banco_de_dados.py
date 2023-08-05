@@ -17,6 +17,11 @@ class BancoDeDados:
         self.insert('ordem', ordem)
         print(ordem)
 
+    def select_ordem_banco_de_dados(self, cliente_id):
+        print("Buscando carteira no banco de dados: ")
+        carteira_selecionada = self.select('ordem', {'id': cliente_id})
+        return carteira_selecionada
+
     def insert_cliente_banco_de_dados(self, cliente):
         print("Inserindo cliente no banco de dados... ")
         insert_query = """

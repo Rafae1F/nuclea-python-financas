@@ -41,30 +41,40 @@ class BancoDeDados:
         self.cursor.execute(insert_query, values)
         self.connection.commit()
 
-    def select_cliente_banco_de_dados(self, conditions):
-        print("Selecionando cliente no banco de dados: ")
-        condition = ' AND '.join([f"{key} = %s" for key in conditions.keys()])
-        select_query = f"SELECT * FROM cliente where {condition}"
-        self.cursor.execute(select_query, list(conditions.values()))
-        clientes = self.cursor.fetchall()
-        if clientes:
-            for cliente in clientes:
-                print(cliente)
-                print("Cliente encontrado!")
-            return clientes
-        else:
-            print("Documento não encontrado na base de dados.")
+    def update_cliente_banco_de_dados(self, cpf, novos_dados):
+        print("Atualizando dados no banco de dados...")
+        update_query = """
+                    UPDATE cliente
+                    SET nome = %s, cpf = %s, rg = %s, data_nascimento = %s,
+                        cep = %s, logradouro = %s, numero = %s, complemento = %s,
+                        bairro = %s, cidade = %s, estado = %s, ddd = %s
+                    WHERE cpf = %s;
+                """
+        values = (
+            novos_dados['nome'],
+            novos_dados['cpf'],
+            novos_dados['rg'],
+            novos_dados['data_nascimento'],
+            novos_dados['endereco']['CEP'],
+            novos_dados['endereco']['Logradouro'],
+            novos_dados['endereco']['Numero'],
+            novos_dados['endereco']['Complemento'],
+            novos_dados['endereco']['Bairro'],
+            novos_dados['endereco']['Cidade'],
+            novos_dados['endereco']['Estado'],
+            novos_dados['endereco']['DDD'],
+            cpf,
+        )
+        self.cursor.execute(update_query, values)
+        self.connection.commit()
 
-    def update_cliente_banco_de_dados(self, cliente):
-        if not cliente.cpf:
-            raise ValueError("CPF é obrigatório para atualizar o cliente.")
-        cliente_data = cliente.__dict__
-        if cliente.endereco:
-            endereco = cliente_data.pop('endereco')
-            cliente_data.update(endereco.__dict__)
-        self.update('cliente', {'cpf': cliente.cpf}, cliente_data)
+    def select_cliente_banco_de_dados(self, cpf):
+        print("Buscando cliente no banco de dados: ")
+        cliente_selecionado = self.select('cliente', {'cpf': cpf})
+        return cliente_selecionado
 
     def delete_cliente_banco_de_dados(self, cpf):
+        print("Removendo cliente da base de dados.")
         self.delete('cliente', {'cpf': cpf})
 
     def insert(self, tabela_nome, data):
@@ -80,9 +90,10 @@ class BancoDeDados:
         row = self.cursor.fetchone()
         if row:
             columns = [desc[0] for desc in self.cursor.description]
-            return dict(zip(columns, row))
-        else:
-            return None
+            select_coluna_linha = (dict(zip(columns, row)))
+            select_linha = row
+            print(select_linha)
+            return select_coluna_linha
 
     def update(self, tabela_nome, conditions, data):
         set_str = ', '.join([f"{key} = %s" for key in data.keys()])

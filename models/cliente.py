@@ -34,13 +34,12 @@ class Cliente:
         self.ddd = "ddd"
         self.banco_de_dados.insert_cliente_banco_de_dados(cliente)
 
-    def consultar_cliente(self, consulta):
-        condicao = {'cpf': consulta}
-        self.banco_de_dados.select_cliente_banco_de_dados(condicao)
+    def consultar_cliente(self, cpf):
+        cliente_selecionado = self.banco_de_dados.select_cliente_banco_de_dados(cpf)
+        return cliente_selecionado
 
-    def alterar_cliente(self):
-        condicao = {'cpf': self}
-        self.banco_de_dados.update_cliente_banco_de_dados(condicao)
+    def alterar_cliente(self, cpf, novos_dados):
+        self.banco_de_dados.update_cliente_banco_de_dados(cpf, novos_dados)
 
-    def delete_cliente(self, cpf_delecao):
-        self.banco_de_dados.delete_cliente_banco_de_dados(cpf_delecao)
+    def delete_cliente(self, cpf):
+        self.banco_de_dados.delete_cliente_banco_de_dados(cpf)

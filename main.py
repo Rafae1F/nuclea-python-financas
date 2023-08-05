@@ -51,21 +51,29 @@ def cadastro_cliente():
 
 def consulta_cliente():
     cliente = Cliente()
-    cpf_consulta = input("Digite o CPF do cliente a ser consultado: ")
-    cliente.consultar_cliente(cpf_consulta)
+    cpf_consulta = input("Digite o CPF do cliente a ser selecionado: ")
+    cliente_selecionado = cliente.consultar_cliente(cpf_consulta)
+    if cliente_selecionado is not None:
+        print("Cliente encontrado!")
+        return cpf_consulta, cliente
+    else:
+        print("Documento não encontrado na base de dados")
 
 
 def atualiza_cliente():
     cliente = Cliente()
-    cpf_atualizacao = input("Digite o CPF do cliente a ser atualizado: ")
-    cliente = cliente.consultar_cliente(cpf_atualizacao)
-    if cliente:
-        cliente.nome = input("Digite o novo nome do cliente: ")
-        cliente.cpf = valida_cpf()
-        cliente.rg = valida_rg()
-        cliente.data_nascimento = valida_data_nascimento()
-        cliente.endereco = cadastro_endereco()
-        cliente.alterar_cliente()
+    cpf_consulta = input("Digite o CPF do cliente a ser atualizado: ")
+    cliente_encontrado = cliente.consultar_cliente(cpf_consulta)
+    if cliente_encontrado is not None:
+        print("Informe os dados a serem atualizados: ")
+        novos_dados = {
+            'nome': formata_texto(input("Nome: ")),
+            'cpf': valida_cpf(),
+            'rg': valida_rg(),
+            'data_nascimento': valida_data_nascimento(),
+            'endereco': cadastro_endereco()
+        }
+        cliente.alterar_cliente(cpf_consulta, novos_dados)
         print("Cliente atualizado com sucesso!")
     else:
         print("Cliente não encontrado.")
@@ -73,17 +81,19 @@ def atualiza_cliente():
 
 def deleta_cliente():
     cliente = Cliente()
-    cpf_delecao = input("Digite o CPF do cliente a ser deletado: ")
-    cliente = cliente.consultar_cliente(cpf_delecao)
-    if cliente:
-        confirmacao = input("Tem certeza que deseja remover esse cliente? (sim/nao)")
+    cpf_consulta = input("Digite o CPF do cliente a ser deletado: ")
+    cliente_encontrado = cliente.consultar_cliente(cpf_consulta)
+    if cliente_encontrado is not None:
+        confirmacao = input("Tem certeza que deseja remover esse cliente? (sim/nao) ")
         if confirmacao in ["sim", "s"]:
-            cliente.delete_cliente(cpf_delecao)
+            cliente.delete_cliente(cpf_consulta)
             print("Cliente deletado com sucesso!")
         elif confirmacao in ["nao", "n"]:
-            menu_cliente()
+            return True
         else:
             print("Opção inválida!")
+    else:
+        print("Documento não encontrado na base de dados")
 
 
 def cadastro_ordem():

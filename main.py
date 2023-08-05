@@ -3,7 +3,7 @@ from models.cliente import Cliente
 from models.ordem import Ordem
 from relatorio import obter_dados_acao
 from utils.cep import cadastro_endereco
-from utils.data import valida_data_nascimento
+from utils.data import valida_data_nascimento, valida_data_compra
 from utils.funcoes_auxiliares import *
 from utils.valida_cpf import valida_cpf
 from utils.valida_rg import valida_rg
@@ -108,7 +108,7 @@ def cadastro_ordem():
             'ticket': input("Digite o ticket da ação: ").strip().upper(),
             'valor_compra': float(input("Digite o valor de compra: ")),
             'quantidade_compra': int(input("Digite a quantidade: ")),
-            'data_compra': input("Digite a data de compra: "),
+            'data_compra': valida_data_compra(),
             'cliente_id': cliente_encontrado['id']
         }
         retornar_menu(ordem, cadastro_ordem)

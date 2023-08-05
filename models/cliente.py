@@ -1,10 +1,9 @@
 from repository.banco_de_dados import BancoDeDados
 
-clientes = []
-
 
 class Cliente:
     def __init__(self):
+        self.id = None
         self.nome = None
         self.cpf = None
         self.rg = None
@@ -20,6 +19,7 @@ class Cliente:
         self.banco_de_dados = BancoDeDados()
 
     def cadastrar_cliente(self, cliente):
+        self.id = "id"
         self.nome = "nome"
         self.cpf = "cpf"
         self.rg = "rg"

@@ -1,8 +1,7 @@
 from analise_carteira import analise_carteira
-from models import ordem
 from models.cliente import Cliente
+from models.ordem import Ordem
 from relatorio import obter_dados_acao
-from repository.banco_de_dados import conexao
 from utils.cep import cadastro_endereco
 from utils.data import valida_data_nascimento
 from utils.funcoes_auxiliares import *
@@ -19,37 +18,14 @@ def menu_cliente():
         print("4 - Deletar cliente")
         print("5 - Retornar ao menu principal")
         opcao = int(input("Escolha uma opção de 1 a 5: "))
-        consulta_cliente = Cliente()
         if opcao == 1:
             cadastro_cliente()
         elif opcao == 2:
-            cpf_consulta = input("Digite o CPF do cliente a ser consultado: ")
-            consulta_cliente.consultar_cliente(cpf_consulta)
+            consulta_cliente()
         elif opcao == 3:
-            cpf_atualizacao = input("Digite o CPF do cliente a ser atualizado: ")
-            cliente = consulta_cliente.consultar_cliente(cpf_atualizacao)
-            if cliente:
-                cliente.nome = input("Digite o novo nome do cliente: ")
-                cliente.cpf = valida_cpf()
-                cliente.rg = valida_rg()
-                cliente.data_nascimento = valida_data_nascimento()
-                cliente.endereco = cadastro_endereco()
-                consulta_cliente.alterar_cliente()
-                print("Cliente atualizado com sucesso!")
-            else:
-                print("Cliente não encontrado.")
+            atualiza_cliente()
         elif opcao == 4:
-            cpf_delecao = input("Digite o CPF do cliente a ser deletado: ")
-            consulta_cliente.consultar_cliente(cpf_delecao)
-            if clientes in cpf_delecao:
-                confirmacao = input("Tem certeza que deseja remover esse cliente? (sim/nao)")
-                if confirmacao in ["sim", "s"]:
-                    consulta_cliente.delete_cliente(cpf_delecao)
-                    print("Cliente deletado com sucesso!")
-                elif confirmacao in ["nao", "n"]:
-                    menu_cliente()
-                else:
-                    print("Opção inválida!")
+            deleta_cliente()
         elif opcao == 5:
             return True
         else:
@@ -66,24 +42,80 @@ def cadastro_cliente():
     }
     retornar_menu(cliente, cadastro_cliente)
     cliente['endereco'] = cadastro_endereco()
-    print(cliente)
     novo_cliente = Cliente()
     novo_cliente.cadastrar_cliente(cliente)
     clientes.append(cliente)
+    print(cliente)
     print("Cadastro finalizado com sucesso!")
 
 
-def menu_ordem():
+def consulta_cliente():
+    cliente = Cliente()
+    cpf_consulta = input("Digite o CPF do cliente a ser consultado: ")
+    cliente.consultar_cliente(cpf_consulta)
+
+
+def atualiza_cliente():
+    cliente = Cliente()
+    cpf_atualizacao = input("Digite o CPF do cliente a ser atualizado: ")
+    cliente = cliente.consultar_cliente(cpf_atualizacao)
+    if cliente:
+        cliente.nome = input("Digite o novo nome do cliente: ")
+        cliente.cpf = valida_cpf()
+        cliente.rg = valida_rg()
+        cliente.data_nascimento = valida_data_nascimento()
+        cliente.endereco = cadastro_endereco()
+        cliente.alterar_cliente()
+        print("Cliente atualizado com sucesso!")
+    else:
+        print("Cliente não encontrado.")
+
+
+def deleta_cliente():
+    cliente = Cliente()
+    cpf_delecao = input("Digite o CPF do cliente a ser deletado: ")
+    cliente = cliente.consultar_cliente(cpf_delecao)
+    if cliente:
+        confirmacao = input("Tem certeza que deseja remover esse cliente? (sim/nao)")
+        if confirmacao in ["sim", "s"]:
+            cliente.delete_cliente(cpf_delecao)
+            print("Cliente deletado com sucesso!")
+        elif confirmacao in ["nao", "n"]:
+            menu_cliente()
+        else:
+            print("Opção inválida!")
+
+
+def cadastro_ordem():
+    cliente = Cliente()
+    ordem = Ordem()
     print("2 - Módulo Cadastro - Ordem de Ações - Informe seu cpf para acessar o sistema: ")
-    cpf_consulta = input("CPF: ")
-    conditions = {'cpf': cpf_consulta}
-    cliente_selecionado = conexao.select_cliente_banco_de_dados(conditions)
-    if cliente_selecionado:
-        ordem.Ordem.cadastrar_ordem(cliente_selecionado)
-        retornar_menu(cliente_selecionado, menu_ordem())
+    cpf = input("CPF: ")
+    cliente_selecionado = cliente.consultar_cliente(cpf)
+    if cliente_selecionado is not None:
+        ordem.cadastrar_ordem(cliente_selecionado[cpf])
         print("Ordem finalizada com sucesso!")
     else:
         print("Documento não encontrado.")
+
+
+def menu_analise():
+    while True:
+        print("=========== MENU CLIENTE ===========")
+        print("1 - Fazer analise da carteira cliente")
+        print("2 - Consultar ações")
+        print("3 - Retornar ao menu principal")
+        opcao = int(input("Escolha uma opção de 1 a 5: "))
+        if opcao == 1:
+            consulta_carteira = input("Informe o CPF para consultar a carteira: ")
+            analise_carteira()
+        elif opcao == 2:
+            consulta_acoes = input("Informe as acoes para analise: ")
+            analise_carteira()
+        elif opcao == 3:
+            return True
+        else:
+            print("Opção inválida!")
 
 
 def analise():
@@ -92,6 +124,9 @@ def analise():
 
 def imprime_relatorio():
     print("4 - Imprimir relatório da carteira")
+    ticket = input("Digite o código da ação na B3 (ex: PETR4): ").strip().upper()
+    nome_arquivo = input("Digite o nome do arquivo de saída (ex: relatorio_acao.txt): ").strip()
+    obter_dados_acao(ticket, nome_arquivo)
 
 
 clientes = []
@@ -115,13 +150,11 @@ def main():
         if opcao == 1:
             menu_cliente()
         elif opcao == 2:
-            menu_ordem()
+            cadastro_ordem()
         elif opcao == 3:
-            analise_carteira()
+            menu_analise()
         elif opcao == 4:
-            ticket = input("Digite o código da ação na B3 (ex: PETR4): ").strip().upper()
-            nome_arquivo = input("Digite o nome do arquivo de saída (ex: relatorio_acao.txt): ").strip()
-            obter_dados_acao(ticket, nome_arquivo)
+            imprime_relatorio()
         elif opcao == 5:
             print("Sair")
             print("Obrigado por utilizar o sistema de gerenciamento de carteira de ações da Nuclea. Até a próxima!")

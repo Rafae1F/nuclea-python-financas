@@ -13,9 +13,8 @@ class BancoDeDados:
         self.connection.close()
 
     def insert_ordem_banco_de_dados(self, ordem):
-        ordem_data = ordem
-        ordem_data.pop('banco_de_dados', None)
-        self.insert('ordem', ordem_data)
+        print("Inserindo ordem no banco de dados...")
+        self.insert('ordem', ordem)
 
     def insert_cliente_banco_de_dados(self, cliente):
         print("Inserindo cliente no banco de dados... ")

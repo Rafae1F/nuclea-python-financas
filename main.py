@@ -98,12 +98,21 @@ def deleta_cliente():
 
 def cadastro_ordem():
     cliente = Cliente()
-    ordem = Ordem()
-    print("2 - Módulo Cadastro - Ordem de Ações - Informe seu cpf para acessar o sistema: ")
+    nova_ordem = Ordem()
+    print("2 - Módulo Cadastro de Ordem/Ações - Informe seu cpf para acessar o sistema: ")
     cpf = input("CPF: ")
-    cliente_selecionado = cliente.consultar_cliente(cpf)
-    if cliente_selecionado is not None:
-        ordem.cadastrar_ordem(cliente_selecionado[cpf])
+    cliente_encontrado = cliente.consultar_cliente(cpf)
+    if cliente_encontrado is not None:
+        ordem = {
+            'nome': input("Digite o nome da ação: ").upper(),
+            'ticket': input("Digite o ticket da ação: ").strip().upper(),
+            'valor_compra': float(input("Digite o valor de compra: ")),
+            'quantidade_compra': int(input("Digite a quantidade: ")),
+            'data_compra': input("Digite a data de compra: "),
+            'cliente_id': cpf
+        }
+        retornar_menu(ordem, cadastro_ordem)
+        nova_ordem.cadastrar_ordem(ordem)
         print("Ordem finalizada com sucesso!")
     else:
         print("Documento não encontrado.")

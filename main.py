@@ -13,11 +13,11 @@ from utils.valida_rg import valida_rg
 def menu_cliente():
     while True:
         print("=========== MENU CLIENTE ===========")
-        print("1 - Cadastrar cliente")
-        print("2 - Consultar cliente")
-        print("3 - Atualizar cliente")
-        print("4 - Deletar cliente")
-        print("5 - Retornar ao menu principal")
+        print("[1] - Cadastrar cliente")
+        print("[2] - Consultar cliente")
+        print("[3] - Atualizar cliente")
+        print("[4] - Deletar cliente")
+        print("[5] - Retornar ao menu principal")
         opcao = int(input("Escolha uma opção de 1 a 5: "))
         if opcao == 1:
             cadastro_cliente()
@@ -34,7 +34,7 @@ def menu_cliente():
 
 
 def cadastro_cliente():
-    print("1 - Módulo Cadastro de Clientes - Informe os dados do cliente:")
+    print("[1] - Módulo Cadastro de Clientes - Informe os dados do cliente:")
     cliente = {
         "nome": formata_texto(input("Nome: ")),
         "cpf": valida_cpf(),
@@ -100,7 +100,7 @@ def deleta_cliente():
 def cadastro_ordem():
     cliente = Cliente()
     nova_ordem = Ordem()
-    print("2 - Módulo Cadastro de Ordem/Ações - Informe seu cpf para acessar o sistema: ")
+    print("[2] - Módulo Cadastro de Ordem/Ações - Informe seu cpf para acessar o sistema: ")
     cpf = input("CPF: ")
     cliente_encontrado = cliente.consultar_cliente(cpf)
     if cliente_encontrado is not None:
@@ -121,7 +121,7 @@ def cadastro_ordem():
 
 
 def analise_carteira():
-    print("1 - Realizar análise da Carteira - Cliente")
+    print("[3] - Realizar análise da Carteira - Cliente")
     cliente = Cliente()
     carteira = Ordem()
     cpf_consulta = input("Informe o CPF para consultar a carteira: ")
@@ -140,9 +140,9 @@ def analise_carteira():
 def menu_relatorio():
     while True:
         print("=========== MENU CLIENTE ===========")
-        print("1 - Imprimir relatório da carteira")
-        print("2 - Consultar relatório da ação")
-        print("3 - Retornar ao menu principal")
+        print("[1] - Imprimir relatório da carteira")
+        print("[2] - Consultar relatório da ação")
+        print("[3] - Retornar ao menu principal")
         opcao = int(input("Escolha uma opção de 1 a 3: "))
         if opcao == 1:
             imprime_relatorio_carteira()
@@ -155,7 +155,7 @@ def menu_relatorio():
 
 
 def imprime_relatorio_carteira():
-    print("4 - Imprimir relatório da carteira")
+    print("[1] - Imprimir relatório da carteira")
     cliente = Cliente()
     carteira = Ordem()
     cpf_consulta = input("Informe o CPF para consultar a carteira: ")
@@ -169,7 +169,7 @@ def imprime_relatorio_carteira():
 
 
 def imprime_relatorio():
-    print("4 - Imprimir relatório da carteira")
+    print("[2] - Imprimir relatório da carteira")
     ticket = input("Digite o código da ação na B3 (ex: PETR4): ").strip().upper()
     nome_arquivo = input("Digite o nome do arquivo de saída (ex: relatorio_acao.txt): ").strip()
     obter_dados_acao(ticket, nome_arquivo)
@@ -185,11 +185,11 @@ def main():
     validador = True
     while validador:
         print("=============== MENU ===============")
-        print("1 - Cliente")
-        print("2 - Cadastrar ação")
-        print("3 - Realizar análise da carteira")
-        print("4 - Imprimir relatório da carteira")
-        print("5 - Sair")
+        print("[1] - Cliente")
+        print("[2] - Cadastrar ação")
+        print("[3] - Realizar análise da carteira")
+        print("[4] - Imprimir relatório da carteira")
+        print("[5] - Sair")
 
         opcao = int(input("Escolha uma opção de 1 a 5: "))
 

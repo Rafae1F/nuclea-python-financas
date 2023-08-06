@@ -114,6 +114,7 @@ def cadastro_ordem():
         }
         retornar_menu(ordem, cadastro_ordem)
         nova_ordem.cadastrar_ordem(ordem)
+        ordens.append(ordem)
         print("Ordem finalizada com sucesso!")
     else:
         print("Documento não encontrado.")

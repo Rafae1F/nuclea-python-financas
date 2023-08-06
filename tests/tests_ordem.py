@@ -6,17 +6,18 @@ from main import main, ordens
 class TestOrdem(unittest.TestCase):
 
     def test_ordem(self):
-        inputs = ["2", "519.403.168-80", "Itaú Unibanco", "ITUB4", 23.84, 500, "01/08/2023", "sim", "5"]
+        inputs = ["2", "746.197.580-35", "Itaú Unibanco", "ITUB4", 27.88, 500, "05/08/2023", "sim", "5"]
 
         with patch("builtins.input", side_effect=inputs):
             main()
 
         ordem_esperada = {
-            "nome": "Itaú Unibanco",
+            "nome": "ITAÚ UNIBANCO",
             "ticket": "ITUB4",
-            "valor_compra": 23.84,
+            "valor_compra": 27.88,
             "quantidade_compra": 500,
-            "data_compra": "01/08/2023"
+            "data_compra": "05/08/2023",
+            "cliente_id": 15
         }
 
         self.assertIn(ordem_esperada, ordens)

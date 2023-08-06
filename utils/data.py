@@ -26,11 +26,11 @@ def valida_data_inicio():
             return data_compra_mascarada
 
 
-def valida_data_fim():
+def valida_data_fim(data_inicio):
     while True:
         data_compra = input("Data de fim: ")
         data_compra_mascarada = mascara_data(data_compra)
-        if valida_data(data_compra_mascarada):
+        if valida_data_alt(data_compra_mascarada, data_inicio):
             return data_compra_mascarada
 
 
@@ -47,6 +47,21 @@ def valida_data(data_informada):
         data_atual = datetime.now().date()
         if data_convertida <= data_atual:
             return data_convertida.strftime("%d/%m/%Y")
+        else:
+            print("A data informada não pode ser maior que a data atual.")
+            return False
+    except ValueError:
+        print("Data inválida. Certifique-se de informar a data no formato dd/mm/aaaa.")
+        return False
+
+
+def valida_data_alt(data_fim, data_inicio):
+    try:
+        data_convertida_inicio = datetime.strptime(data_inicio, "%d/%m/%Y").date()
+        data_convertida_fim = datetime.strptime(data_fim, "%d/%m/%Y").date()
+        data_atual = datetime.now().date()
+        if data_atual >= data_convertida_fim > data_convertida_inicio:
+            return data_convertida_fim.strftime("%d/%m/%Y")
         else:
             print("A data informada não pode ser maior que a data atual.")
             return False

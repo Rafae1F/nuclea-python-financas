@@ -127,23 +127,11 @@ def menu_analise():
         print("3 - Retornar ao menu principal")
         opcao = int(input("Escolha uma opção de 1 a 5: "))
         if opcao == 1:
-            cliente = Cliente()
-            carteira = Ordem()
-            cpf_consulta = input("Informe o CPF para consultar a carteira: ")
-            cliente_encontrado = cliente.consultar_cliente(cpf_consulta)
-            if cliente_encontrado is not None:
-                data_inicio = valida_data_inicio()
-                data_inicio = converte_data_alt(data_inicio)
-                data_fim = valida_data_fim()
-                data_fim = converte_data_alt(data_fim)
-                consulta_carteira = carteira.consultar_ordem(cliente_encontrado['id'])
-                analise_carteira_cliente(consulta_carteira, data_inicio, data_fim)
-            else:
-                print("Documento não encontrado na base de dados.")
+            analise_carteira()
         elif opcao == 2:
             consulta_acoes = input("Informe os tickets para analise: ex: BBAS3, BRFS3 ")
             data_inicio = valida_data_inicio()
-            data_fim = valida_data_fim()
+            data_fim = valida_data_fim(data_inicio)
             analise_carteira_cliente(consulta_acoes, data_inicio, data_fim)
         elif opcao == 3:
             return True
@@ -151,8 +139,21 @@ def menu_analise():
             print("Opção inválida!")
 
 
-def analise():
-    print("3 - Realizar análise da carteira")
+def analise_carteira():
+    print("1 - Realizar análise da Carteira - Cliente")
+    cliente = Cliente()
+    carteira = Ordem()
+    cpf_consulta = input("Informe o CPF para consultar a carteira: ")
+    cliente_encontrado = cliente.consultar_cliente(cpf_consulta)
+    if cliente_encontrado is not None:
+        data_inicio = valida_data_inicio()
+        data_fim = valida_data_fim(data_inicio)
+        data_inicio = converte_data_alt(data_inicio)
+        data_fim = converte_data_alt(data_fim)
+        consulta_carteira = carteira.consultar_ordem(cliente_encontrado['id'])
+        analise_carteira_cliente(consulta_carteira, data_inicio, data_fim)
+    else:
+        print("Documento não encontrado na base de dados.")
 
 
 def imprime_relatorio():

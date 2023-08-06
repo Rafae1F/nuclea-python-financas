@@ -19,7 +19,7 @@ class Ordem:
         self.valor_compra = "valor_compra"
         self.quantidade_compra = "quantidade_compra"
         self.data_compra = "data_compra"
-        self.cliente_id = "id"
+        self.cliente_id = "cliente_id"
         self.banco_de_dados.insert_ordem_banco_de_dados(ordem)
 
     def consultar_ordem(self, cliente):

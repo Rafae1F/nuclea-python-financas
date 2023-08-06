@@ -19,7 +19,7 @@ class BancoDeDados:
 
     def select_ordem_banco_de_dados(self, cliente_id):
         print("Buscando carteira no banco de dados: ")
-        carteira_selecionada = self.select('ordem', {'cliente_id': cliente_id})
+        carteira_selecionada = self.select_all('ordem', {'cliente_id': cliente_id})
         return carteira_selecionada
 
     def insert_cliente_banco_de_dados(self, cliente):
@@ -99,6 +99,21 @@ class BancoDeDados:
             select_linha = row
             print(select_linha)
             return select_coluna_linha
+
+    def select_all(self, tabela_nome, conditions):
+        condition_str = ' AND '.join([f"{key} = %s" for key in conditions.keys()])
+        select_query = f"SELECT * FROM {tabela_nome} WHERE {condition_str}"
+        self.cursor.execute(select_query, list(conditions.values()))
+        rows = self.cursor.fetchall()
+        if rows:
+            columns = [desc[0] for desc in self.cursor.description]
+            results = []
+            for row in rows:
+                result_dict = dict(zip(columns, row))
+                results.append(result_dict)
+            return results
+        else:
+            return []
 
     def update(self, tabela_nome, conditions, data):
         set_str = ', '.join([f"{key} = %s" for key in data.keys()])

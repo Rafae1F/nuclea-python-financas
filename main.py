@@ -1,7 +1,7 @@
 from analise_carteira import analise_carteira_cliente
 from models.cliente import Cliente
 from models.ordem import Ordem
-from relatorio import obter_dados_acao
+from relatorio import obter_dados_acao, obter_dados_carteira_cliente
 from utils.cep import cadastro_endereco
 from utils.data import valida_data_nascimento, valida_data_compra, valida_data_fim, valida_data_inicio, \
     converte_data_alt
@@ -120,26 +120,6 @@ def cadastro_ordem():
         print("Documento não encontrado.")
 
 
-def menu_analise():
-    while True:
-        print("=========== MENU CLIENTE ===========")
-        print("1 - Fazer analise da carteira cliente")
-        print("2 - Consultar ações")
-        print("3 - Retornar ao menu principal")
-        opcao = int(input("Escolha uma opção de 1 a 5: "))
-        if opcao == 1:
-            analise_carteira()
-        elif opcao == 2:
-            consulta_acoes = input("Informe os tickets para analise: ex: BBAS3, BRFS3 ")
-            data_inicio = valida_data_inicio()
-            data_fim = valida_data_fim(data_inicio)
-            analise_carteira_cliente(consulta_acoes, data_inicio, data_fim)
-        elif opcao == 3:
-            return True
-        else:
-            print("Opção inválida!")
-
-
 def analise_carteira():
     print("1 - Realizar análise da Carteira - Cliente")
     cliente = Cliente()
@@ -153,6 +133,37 @@ def analise_carteira():
         data_fim = converte_data_alt(data_fim)
         consulta_carteira = carteira.consultar_ordem(cliente_encontrado['id'])
         analise_carteira_cliente(consulta_carteira, data_inicio, data_fim)
+    else:
+        print("Documento não encontrado na base de dados.")
+
+
+def menu_relatorio():
+    while True:
+        print("=========== MENU CLIENTE ===========")
+        print("1 - Imprimir relatório da carteira")
+        print("2 - Consultar relatório da ação")
+        print("3 - Retornar ao menu principal")
+        opcao = int(input("Escolha uma opção de 1 a 3: "))
+        if opcao == 1:
+            imprime_relatorio_carteira()
+        elif opcao == 2:
+            imprime_relatorio()
+        elif opcao == 3:
+            return True
+        else:
+            print("Opção inválida!")
+
+
+def imprime_relatorio_carteira():
+    print("4 - Imprimir relatório da carteira")
+    cliente = Cliente()
+    carteira = Ordem()
+    cpf_consulta = input("Informe o CPF para consultar a carteira: ")
+    cliente_encontrado = cliente.consultar_cliente(cpf_consulta)
+    if cliente_encontrado is not None:
+        consulta_carteira = carteira.consultar_ordem(cliente_encontrado['id'])
+        nome_arquivo = input("Digite o nome do arquivo de saída (ex: relatorio_acao.txt): ").strip()
+        obter_dados_carteira_cliente(consulta_carteira, nome_arquivo)
     else:
         print("Documento não encontrado na base de dados.")
 
@@ -187,9 +198,9 @@ def main():
         elif opcao == 2:
             cadastro_ordem()
         elif opcao == 3:
-            menu_analise()
+            analise_carteira()
         elif opcao == 4:
-            imprime_relatorio()
+            menu_relatorio()
         elif opcao == 5:
             print("Sair")
             print("Obrigado por utilizar o sistema de gerenciamento de carteira de ações da Nuclea. Até a próxima!")

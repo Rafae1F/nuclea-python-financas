@@ -34,7 +34,7 @@ def analise_carteira_cliente(carteira, data_inicio, data_fim):
     start_date = data_inicio
     end_date = data_fim
 
-    lista = carteira
+    lista = [carteira['ticket']]
 
     # Criar um DataFrame vazio
     df = pd.DataFrame()

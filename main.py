@@ -1,9 +1,10 @@
-from analise_carteira import analise_carteira, analise_carteira_cliente
+from analise_carteira import analise_carteira_cliente
 from models.cliente import Cliente
 from models.ordem import Ordem
 from relatorio import obter_dados_acao
 from utils.cep import cadastro_endereco
-from utils.data import valida_data_nascimento, valida_data_compra
+from utils.data import valida_data_nascimento, valida_data_compra, valida_data_fim, valida_data_inicio, \
+    converte_data_alt
 from utils.funcoes_auxiliares import *
 from utils.valida_cpf import valida_cpf
 from utils.valida_rg import valida_rg
@@ -131,16 +132,18 @@ def menu_analise():
             cpf_consulta = input("Informe o CPF para consultar a carteira: ")
             cliente_encontrado = cliente.consultar_cliente(cpf_consulta)
             if cliente_encontrado is not None:
-                data_inicio = valida_data_compra()
-                data_fim = valida_data_compra()
-                consulta_carteira = carteira.consultar_ordem(cliente_encontrado.id)
+                data_inicio = valida_data_inicio()
+                data_inicio = converte_data_alt(data_inicio)
+                data_fim = valida_data_fim()
+                data_fim = converte_data_alt(data_fim)
+                consulta_carteira = carteira.consultar_ordem(cliente_encontrado['id'])
                 analise_carteira_cliente(consulta_carteira, data_inicio, data_fim)
             else:
                 print("Documento não encontrado na base de dados.")
         elif opcao == 2:
             consulta_acoes = input("Informe os tickets para analise: ex: BBAS3, BRFS3 ")
-            data_inicio = valida_data_compra()
-            data_fim = valida_data_compra()
+            data_inicio = valida_data_inicio()
+            data_fim = valida_data_fim()
             analise_carteira_cliente(consulta_acoes, data_inicio, data_fim)
         elif opcao == 3:
             return True

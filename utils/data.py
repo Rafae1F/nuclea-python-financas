@@ -18,6 +18,22 @@ def valida_data_compra():
             return data_compra_mascarada
 
 
+def valida_data_inicio():
+    while True:
+        data_compra = input("Data de inicio: ")
+        data_compra_mascarada = mascara_data(data_compra)
+        if valida_data(data_compra_mascarada):
+            return data_compra_mascarada
+
+
+def valida_data_fim():
+    while True:
+        data_compra = input("Data de fim: ")
+        data_compra_mascarada = mascara_data(data_compra)
+        if valida_data(data_compra_mascarada):
+            return data_compra_mascarada
+
+
 def mascara_data(data_informada):
     if re.match(r'(\d{2})/(\d{2})/(\d{2,4})', data_informada):
         return data_informada
@@ -37,6 +53,15 @@ def valida_data(data_informada):
     except ValueError:
         print("Data inválida. Certifique-se de informar a data no formato dd/mm/aaaa.")
         return False
+
+
+def converte_data_alt(data_informada):
+    try:
+        data_objeto = datetime.strptime(data_informada, '%d/%m/%Y')
+        data_informada = data_objeto.strftime('%Y-%m-%d')
+        return data_informada
+    except ValueError:
+        return "Formato de data inválido. Use o formato d/m/Y."
 
 
 if __name__ == "__main__":

@@ -19,7 +19,7 @@ class BancoDeDados:
 
     def select_ordem_banco_de_dados(self, cliente_id):
         print("Buscando carteira no banco de dados: ")
-        carteira_selecionada = self.select('ordem', {'id': cliente_id})
+        carteira_selecionada = self.select('ordem', {'cliente_id': cliente_id})
         return carteira_selecionada
 
     def insert_cliente_banco_de_dados(self, cliente):

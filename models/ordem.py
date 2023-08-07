@@ -78,7 +78,8 @@ class Ordem:
         else:
             print("Documento não encontrado na base de dados.")
 
-    def imprime_relatorio(self):
+    @staticmethod
+    def imprime_relatorio():
         print("[2] - Imprimir relatório da carteira")
         ticket = input("Digite o código da ação na B3 (ex: PETR4): ").strip().upper()
         nome_arquivo = input("Digite o nome do arquivo de saída (ex: relatorio_acao.txt): ").strip()

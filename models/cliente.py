@@ -3,6 +3,7 @@ from utils.cep import cadastro_endereco
 from utils.data import valida_data_nascimento
 from utils.funcoes_auxiliares import formata_texto, retornar_menu
 from utils.valida_cpf import valida_cpf
+from utils.valida_nome import valida_nome
 from utils.valida_rg import valida_rg
 
 
@@ -55,7 +56,7 @@ class Cliente:
     def cadastro_cliente(self):
         print("[1] - Módulo Cadastro de Clientes - Informe os dados do cliente:")
         cliente = {
-            "nome": formata_texto(input("Nome: ")),
+            "nome": formata_texto(valida_nome()),
             "cpf": valida_cpf(),
             "rg": valida_rg(),
             "data_nascimento": valida_data_nascimento()

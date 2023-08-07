@@ -3,6 +3,7 @@ from relatorio import obter_dados_acao, obter_dados_carteira_cliente
 from repository.banco_de_dados import BancoDeDados
 from utils.data import valida_data_compra, valida_data_inicio, valida_data_fim, converte_data_alt
 from utils.funcoes_auxiliares import retornar_menu
+from utils.valida_nome import valida_nome
 from utils.valida_ticker import valida_ticker
 
 ordens = []
@@ -39,7 +40,7 @@ class Ordem:
         cliente_encontrado = cliente.consultar_cliente(cpf)
         if cliente_encontrado is not None:
             ordem = {
-                'nome': input("Digite o nome da ação: ").upper(),
+                'nome': valida_nome().upper(),
                 'ticket': valida_ticker(),
                 'valor_compra': float(input("Digite o valor de compra: ")),
                 'quantidade_compra': int(input("Digite a quantidade: ")),

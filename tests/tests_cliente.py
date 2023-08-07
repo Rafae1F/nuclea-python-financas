@@ -1,17 +1,20 @@
 import unittest
 from faker import Factory
 from unittest.mock import patch
-from main import main, clientes
+from main import main
 from validate_docbr import CPF
+from models.cliente import clientes
 
 
 class TestCliente(unittest.TestCase):
 
-    def gerar_nome_fake(self):
+    @staticmethod
+    def gerar_nome_fake():
         fake = Factory.create('pt_BR')
         return fake.name()
 
-    def gera_cpf(self):
+    @staticmethod
+    def gera_cpf():
         cpf = CPF()
         cpf_gerado = cpf.generate()
         return cpf_gerado

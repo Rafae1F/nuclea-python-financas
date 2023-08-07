@@ -1,6 +1,7 @@
 import unittest
 from unittest.mock import patch
-from main import main, ordens
+from main import main
+from models.ordem import ordens
 
 
 class TestOrdem(unittest.TestCase):

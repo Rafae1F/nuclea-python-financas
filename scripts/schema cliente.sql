@@ -11,6 +11,6 @@ CREATE TABLE IF NOT EXISTS public.cliente
 	complemento character varying(20) NOT NULL,
 	bairro character varying(20) NOT NULL,
 	cidade character varying(15) NOT NULL,
-	uf character varying(2) NOT NULL,
+	estado character varying(2) NOT NULL,
 	ddd character varying(6) NOT NULL
 );

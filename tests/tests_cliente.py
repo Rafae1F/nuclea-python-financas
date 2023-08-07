@@ -20,7 +20,7 @@ class TestCliente(unittest.TestCase):
         nome = self.gerar_nome_fake()
         cpf = self.gera_cpf()
         inputs = ["1", "1", nome, cpf, "12.345.678-x", "12/02/2001", "sim", "05003-060", "42", "apto 100", "sim", "5",
-                  "5"]
+                  "n"]
 
         with patch("builtins.input", side_effect=inputs):
             main()

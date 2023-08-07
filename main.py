@@ -12,7 +12,7 @@ def main():
         print("[1] - Cliente")
         print("[2] - Cadastrar ação")
         print("[3] - Realizar análise da carteira")
-        print("[4] - Imprimir relatório da carteira")
+        print("[4] - Imprimir relatório de ações")
         print("[5] - Sair")
 
         opcao = input("Escolha uma opção de 1 a 5: ")

@@ -76,8 +76,11 @@ class Ordem:
         cliente_encontrado = cliente.consultar_cliente(cpf_consulta)
         if cliente_encontrado is not None:
             consulta_carteira = self.consultar_ordem(cliente_encontrado['id'])
-            nome_arquivo = input("Digite o nome do arquivo de saída (ex: relatorio_acao.txt): ").strip()
-            obter_dados_carteira_cliente(consulta_carteira, nome_arquivo)
+            if consulta_carteira is not None:
+                nome_arquivo = input("Digite o nome do arquivo de saída (ex: relatorio_acao.txt): ").strip()
+                obter_dados_carteira_cliente(consulta_carteira, nome_arquivo)
+            else:
+                print("Não existem ações vinculadas a esse documento.")
         else:
             print("Documento não encontrado na base de dados.")
 

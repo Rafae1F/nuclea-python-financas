@@ -5,6 +5,8 @@ def retornar_menu_principal():
         if opcao in ["sim", "s"]:
             return True
         elif opcao in ["nao", "n"]:
+            print("Sair")
+            print("Obrigado por utilizar o sistema de gerenciamento de carteira de ações da Nuclea. Até a próxima!")
             return False
         else:
             print("Opção inválida, tente novamente. Digite 'sim' ou 'não'.")

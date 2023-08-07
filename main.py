@@ -47,7 +47,7 @@ def main():
         elif opcao == "3":
             ordem.analise_carteira(cliente)
         elif opcao == "4":
-            print("=========== MENU CLIENTE ===========")
+            print("====== MENU RELATÓRIO CARTEIRA ======")
             print("[1] - Imprimir relatório da carteira")
             print("[2] - Consultar relatório da ação")
             print("[3] - Retornar ao menu principal")

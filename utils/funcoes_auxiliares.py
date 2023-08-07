@@ -3,13 +3,14 @@ def retornar_menu_principal():
     while True:
         opcao = input("Deseja retornar ao menu principal? ((s)im ou (f)inalizar aplicação): ").lower()
         if opcao in ["sim", "s", "1"]:
-            return True
+            validador = True
         elif opcao in ["finalizar", "f", "2"]:
             print("Sair")
             print("Obrigado por utilizar o sistema de gerenciamento de carteira de ações da Nuclea. Até a próxima!")
-            return False
+            validador = False
         else:
             print("Opção inválida, tente novamente. Digite 'sim' ou 'não'.")
+        return validador
 
 
 def retornar_menu(item_cadastro, campo_cadastro):

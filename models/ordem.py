@@ -88,6 +88,6 @@ class Ordem:
     @staticmethod
     def imprime_relatorio():
         print("[2] - Imprimir relatório da carteira")
-        ticket = input("Digite o código da ação na B3 (ex: PETR4): ").strip().upper()
+        ticket = valida_ticker().strip().upper()
         nome_arquivo = input("Digite o nome do arquivo de saída (ex: relatorio_acao.txt): ").strip()
         obter_dados_acao(ticket, nome_arquivo)

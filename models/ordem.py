@@ -55,15 +55,18 @@ class Ordem:
 
     def analise_carteira(self, cliente):
         print("[3] - Realizar análise da Carteira - Cliente")
-        cpf_consulta = input("Informe o CPF para consultar a carteira: ")
-        cliente_encontrado = cliente.consultar_cliente(cpf_consulta)
+        cpf = input("Informe o CPF para consultar a carteira: ")
+        cliente_encontrado = cliente.consultar_cliente(cpf)
         if cliente_encontrado is not None:
-            data_inicio = valida_data_inicio()
-            data_fim = valida_data_fim(data_inicio)
-            data_inicio = converte_data_alt(data_inicio)
-            data_fim = converte_data_alt(data_fim)
             consulta_carteira = self.consultar_ordem(cliente_encontrado['id'])
-            analise_carteira_cliente(consulta_carteira, data_inicio, data_fim)
+            if consulta_carteira is not None:
+                data_inicio = valida_data_inicio()
+                data_fim = valida_data_fim(data_inicio)
+                data_inicio = converte_data_alt(data_inicio)
+                data_fim = converte_data_alt(data_fim)
+                analise_carteira_cliente(consulta_carteira, data_inicio, data_fim)
+            else:
+                print("Não existem ações vinculadas a esse documento.")
         else:
             print("Documento não encontrado na base de dados.")
 

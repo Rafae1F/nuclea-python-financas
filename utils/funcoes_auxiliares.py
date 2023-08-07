@@ -1,4 +1,3 @@
-
 def retornar_menu_principal():
     while True:
         opcao = input("Deseja retornar ao menu principal? ((s)im ou (f)inalizar aplicação): ").lower()

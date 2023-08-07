@@ -113,7 +113,7 @@ class BancoDeDados:
                 results.append(result_dict)
             return results
         else:
-            return []
+            return None
 
     def update(self, tabela_nome, conditions, data):
         set_str = ', '.join([f"{key} = %s" for key in data.keys()])
